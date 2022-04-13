@@ -63,7 +63,7 @@ class KategoriController extends Controller
      */
     public function edit(kategori $kategori)
     {
-        dd('edit');
+        return view('update',['edit'=>$kategori]);
     }
 
     /**
@@ -75,7 +75,11 @@ class KategoriController extends Controller
      */
     public function update(Request $request, kategori $kategori)
     {
-        dd('update');
+        $kategori->update([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title,'-')
+        ]);
+        return redirect('/home');
     }
 
     /**
