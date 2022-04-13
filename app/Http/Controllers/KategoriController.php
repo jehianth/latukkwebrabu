@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\kategori;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('insert');
     }
 
     /**
@@ -36,7 +37,11 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        kategori::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title,'-')
+        ]);
+        return redirect('/home');
     }
 
     /**
